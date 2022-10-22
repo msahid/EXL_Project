@@ -2,6 +2,9 @@ package page;
 
 import java.util.Random;
 
+import javax.xml.xpath.XPath;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,9 +38,11 @@ public class AddCustomerPage extends BasePage{
 		Assert.assertEquals(ADD_CONTACT_HEADER.getText(), addContactHeader, "Add contact page is not available");
 	}
 	
+	String insertedName;
 	public void insertFullName(String fullName) {
 		int genNum = generateRandomNumber(999);
-		FULL_NAME_ELEMENT.sendKeys(fullName + genNum);
+		insertedName = fullName + genNum;
+		FULL_NAME_ELEMENT.sendKeys(insertedName);
 	}
 
 	public void selectCompany(String company) {
@@ -83,5 +88,37 @@ public class AddCustomerPage extends BasePage{
 	public void clickSaveButton() {
 		SAVE_BUTTON_ELEMENT.click();
 	}
-
+	
+	//tbody/tr[1]/td[3]
+	
+	//tbody/tr[2]/td[3]
+	
+	//tbody/tr[3]/td[3]
+	
+	//tbody/tr[i]/td[3]
+	
+	//tbody/tr[1]/td[3]/following-sibling::td[4]/a[2]
+	
+	public void validateInsertedCustomerAndDelete() {
+	String before_xpath = "//tbody/tr[";
+	String after_xpath = "]/td[3]";
+	
+	String after_xpath_delete ="]/td[3]/following-sibling::td[4]/a[2]";
+	
+	for(int i = 1; i <=200; i++) {
+		String namesFromList = driver.findElement(By.xpath(before_xpath + i + after_xpath)).getText();
+//		System.out.println(namesFromList);
+//		Assert.assertEquals(namesFromList, insertedName, "Inserted name is not available." );
+		
+		if(namesFromList.equalsIgnoreCase(insertedName)) {
+			System.out.println("Inserted name exist");
+			driver.findElement(By.xpath(before_xpath + i + after_xpath_delete)).click();
+			
+		}
+		break;
+		
+		
+		
+	}
+	}
 }
