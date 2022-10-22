@@ -35,7 +35,7 @@ public class AddCustomerTest {
 //	String email =  "abc@techfios.com";
 //	
 	@Test
-	public void userShouldBeAbleToCreateCustomer() {
+	public void userShouldBeAbleToCreateCustomer() throws InterruptedException {
 		driver = BrowserFactory.init();
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		loginPage.insertUserName(userName);
@@ -45,7 +45,7 @@ public class AddCustomerTest {
 		DashboardPage dashboardPage = PageFactory.initElements(driver, DashboardPage.class);
 		dashboardPage.validateDashboardPage("Dashboard");
 		dashboardPage.clickCustomersButton();
-		dashboardPage.clickAddCustomersButton();
+		dashboardPage.clickAddCustomersMenuElement();
 		
 		AddCustomerPage addCustomerPage = PageFactory.initElements(driver, AddCustomerPage.class);
 		addCustomerPage.validateAddContactPage("Add Contact");
@@ -59,6 +59,8 @@ public class AddCustomerTest {
 		addCustomerPage.selectCountry(country);
 		addCustomerPage.insertZip(zip);
 		addCustomerPage.clickSaveButton();
+		dashboardPage.clickListCustomersMenuElement();
+		addCustomerPage.validateInsertedCustomerAndDelete();
 		
 	}
 

@@ -17,6 +17,7 @@ public class DashboardPage {
 	@FindBy(how = How.XPATH, using = "//*[@id=\"page-wrapper\"]/div[2]/div/h2") WebElement DASHBOARD_HEADER_ELEMENT;
 	@FindBy(how = How.XPATH, using = "//*[@id=\"side-menu\"]/li[3]/a/span[1]") WebElement CUSTOMER_MENU_ELEMENT;
 	@FindBy(how = How.XPATH, using = "//*[@id=\"side-menu\"]/li[3]/ul/li[1]/a") WebElement ADD_CUSTOMER_MENU_ELEMENT;
+	@FindBy(how = How.XPATH, using = "//a[contains(text(), 'List Customers')]") WebElement LIST_CUSTOMER_MENU_ELEMENT;
 
 	public void validateDashboardPage(String validationText) {
 		Assert.assertEquals(DASHBOARD_HEADER_ELEMENT.getText(), validationText, "Dashboard Page is not available");
@@ -26,8 +27,13 @@ public class DashboardPage {
 		CUSTOMER_MENU_ELEMENT.click();
 	}
 
-	public void clickAddCustomersButton() {
+	public void clickAddCustomersMenuElement() {
 		ADD_CUSTOMER_MENU_ELEMENT.click();
+	}
+	
+	public void clickListCustomersMenuElement() throws InterruptedException {
+		Thread.sleep(3000);
+		LIST_CUSTOMER_MENU_ELEMENT.click();
 	}
 
 }
