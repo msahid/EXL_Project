@@ -105,7 +105,7 @@ public class AddCustomerPage extends BasePage{
 	
 	String after_xpath_delete ="]/td[3]/following-sibling::td[4]/a[2]";
 	
-	for(int i = 1; i <=200; i++) {
+	for(int i = 1; i <=20; i++) {
 		String namesFromList = driver.findElement(By.xpath(before_xpath + i + after_xpath)).getText();
 //		System.out.println(namesFromList);
 //		Assert.assertEquals(namesFromList, insertedName, "Inserted name is not available." );
